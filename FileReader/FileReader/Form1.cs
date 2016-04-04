@@ -28,14 +28,30 @@ namespace FileReader
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = "g:\\";
-            ofd.Title = "SampleMaker - Browse For .DAT Files"; //set window title
-            ofd.Filter = "DAT files (*.DAT)|*.DAT*";
+            ofd.Title = "SampleMaker - Browse For .DAT Files";
+            ofd.Filter = "DAT files (*.DAT)|*.DAT*"; // text with file extension seperated with | 
             ofd.RestoreDirectory = true;
-
+            
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 label1.Text = ofd.FileName;
             }
+        }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            label5.Text = label1.Text;
+            using (StreamReader sr = new StreamReader(label5.Text))
+            {
+                String line = await sr.ReadToEndAsync();
+                Console.WriteLine(line);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
         }
     }
 }
